@@ -3,6 +3,16 @@
 # por medio de selectores CSS.
 from selenium.webdriver.common.by import By
 
+
+def obtemer_clima(driver, consulta):
+    driver.get(f"https://www.google.com/search?q=clima+{consulta}")
+    try:
+        temperatura = driver.find_element(By.CSS_SELECTOR, "span[jsname='wob_tm']").text
+        ciudad = driver.find_element(By.CSS_SELECTOR, "div[class='BNeawe tAd8D AP7Wnd']").text
+        return f"El clima en {ciudad} es de {temperatura}°C."
+    except Exception as e:
+        return "No se pudo obtener el clima en este momento."
+
 # Función para obtener el precio de una acción
 # Parámetros:
 # - driver: objeto de Selenium WebDriver
